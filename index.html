@@ -1,133 +1,324 @@
-<!DOCTYPE html>
-<html lang="ha">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Madinaverify | GERA</title>
-  <meta name="description" content="Madinaverify - GERA services, Rigasa, Kaduna.">
-  <style>
-    :root{--blue:#0757b8;--red:#d71920;--dark:#10233f;--light:#f5f8fc}
-    *{box-sizing:border-box;scroll-behavior:smooth}
-    body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--dark);background:#fff;line-height:1.6}
-    header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:3px solid var(--red);box-shadow:0 2px 12px #0001}
-    nav{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px}
-    .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:22px;color:var(--blue)}
-    .logo-mark{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--blue) 55%,var(--red) 55%);display:grid;place-items:center;color:#fff;font-weight:900}
-    nav a{margin-left:18px;text-decoration:none;color:var(--dark);font-weight:700}
-    nav a:hover{color:var(--red)}
-    .hero{background:linear-gradient(135deg,#eef5ff,#fff);padding:85px 20px}
-    .hero-inner{max-width:1100px;margin:auto;display:grid;grid-template-columns:1.4fr .8fr;gap:45px;align-items:center}
-    .badge{display:inline-block;background:#ffe8e9;color:var(--red);padding:7px 14px;border-radius:30px;font-weight:800}
-    h1{font-size:clamp(40px,7vw,68px);line-height:1.05;margin:18px 0 15px}
-    h1 span{color:var(--blue)}
-    .hero p{font-size:19px;max-width:650px}
-    .btn{display:inline-block;margin:12px 10px 0 0;padding:13px 22px;border-radius:10px;text-decoration:none;font-weight:800}
-    .primary{background:var(--red);color:#fff}.secondary{background:var(--blue);color:#fff}
-    .card{background:#fff;border-radius:22px;padding:28px;box-shadow:0 12px 35px #0757b81c;border-top:6px solid var(--blue)}
-    .card h3{margin-top:0;color:var(--red)}
-    section{padding:75px 20px}
-    .wrap{max-width:1100px;margin:auto}
-    .title{text-align:center;margin-bottom:40px}
-    .title h2{font-size:36px;margin:0 0 8px}.title p{color:#5f6f82}
-    .services{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .service{padding:24px;background:var(--light);border-radius:16px;border-left:5px solid var(--red)}
-    .service b{color:var(--blue);font-size:19px}
-    .about{background:#f7f9fc}
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center}
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
-    .contact-box{padding:25px;border-radius:16px;background:var(--light)}
-    .contact-box strong{display:block;color:var(--blue);margin-bottom:5px}
-    footer{background:var(--dark);color:#fff;text-align:center;padding:28px 20px}
-    .whatsapp{position:fixed;right:20px;bottom:20px;background:#25d366;color:#fff;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;text-decoration:none;font-size:27px;box-shadow:0 5px 20px #0003;z-index:20}
-    @media(max-width:800px){
-      nav{flex-direction:column;gap:10px}nav a{margin:0 7px;font-size:14px}
-      .hero-inner,.about-grid,.contact-grid{grid-template-columns:1fr}
-      .services{grid-template-columns:1fr 1fr}
-    }
-    @media(max-width:520px){.services{grid-template-columns:1fr}.hero{padding:55px 18px}section{padding:55px 18px}}
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Madinaverify - NIN & BVN SERVICES in Rigasa, Kaduna">
+<title>Madinaverify | NIN & BVN SERVICES</title>
+<style>
+:root{--b:#075bbb;--r:#df1725;--d:#10213d;--m:#607089;--bg:#f5f8fd}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--d);background:var(--bg);line-height:1.6}
+a{text-decoration:none;color:inherit}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:9;background:#fffffff5;border-bottom:1px solid #e3e9f2}
+.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:11px;font-size:23px;font-weight:900;color:var(--b)}
+.logo{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;color:#fff;font-size:24px;font-weight:900;background:linear-gradient(140deg,var(--b) 0 56%,var(--r) 56%)}
+.menu{display:flex;gap:24px;align-items:center;font-weight:700}.menu a:hover{color:var(--r)}.navbtn{background:var(--r);color:white;padding:10px 16px;border-radius:10px}
+.hero{padding:80px 0;background:linear-gradient(135deg,#edf5ff,#fff);overflow:hidden}.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center}
+.kicker{display:inline-block;background:#ffebed;color:var(--r);padding:8px 14px;border-radius:30px;font-weight:800}
+h1{font-size:clamp(42px,6vw,70px);line-height:1.02;letter-spacing:-2px;margin:18px 0}h1 span{color:var(--b)}
+.lead{font-size:19px;color:var(--m);max-width:650px}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{display:inline-block;padding:14px 21px;border-radius:12px;font-weight:800}.red{background:var(--r);color:white}.blue{background:var(--b);color:white}.white{background:white;border:1px solid #dce4ef}
+.card{background:#fff;padding:28px;border-radius:24px;box-shadow:0 18px 50px #10213d18;border-top:7px solid var(--b)}
+.info{display:flex;gap:13px;padding:14px 0;border-bottom:1px solid #e7edf5}.info:last-child{border:0}.ico{width:40px;height:40px;flex:none;border-radius:11px;background:#edf5ff;display:grid;place-items:center;color:var(--b);font-weight:900}
+.section{padding:78px 0}.head{text-align:center;max-width:700px;margin:0 auto 40px}.eyebrow{color:var(--r);font-size:13px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase}.head h2{font-size:40px;margin:6px 0}.head p{color:var(--m)}
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.service{background:#fff;border:1px solid #e2e9f2;border-radius:17px;padding:22px;transition:.2s}.service:hover{transform:translateY(-4px);box-shadow:0 16px 35px #10213d12}.service-top{display:flex;gap:12px;align-items:center}.num{width:39px;height:39px;border-radius:10px;background:#edf5ff;color:var(--b);display:grid;place-items:center;font-weight:900}.service h3{font-size:17px}.service p{color:var(--m);font-size:14px}
+.about{background:#fff}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}.checks{display:grid;gap:14px;margin-top:22px}.aboutbox{background:linear-gradient(145deg,#0a3f88,var(--b));color:#fff;border-radius:26px;padding:36px}.big{font-size:58px;font-weight:900;line-height:1}
+.contact-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px}.contact-card{background:#fff;border:1px solid #e2e9f2;border-radius:20px;padding:28px}.contact-list{display:grid;gap:18px;margin-top:20px}.contact-item{display:flex;gap:13px}.contact-item .ico{background:#ffebed;color:var(--r)}
+form{display:grid;gap:13px}input,textarea{width:100%;padding:14px;border:1px solid #d8e1ed;border-radius:10px;font:inherit}textarea{min-height:130px;resize:vertical}.note{font-size:12px;color:var(--m)}
+footer{background:#0d1d35;color:#cbd5e4;padding:30px 0}.foot{display:flex;justify-content:space-between;gap:20px}.foot b{color:#fff;font-size:20px}
+.float{position:fixed;right:19px;bottom:19px;width:59px;height:59px;border-radius:50%;display:grid;place-items:center;background:#25d366;color:#fff;font-size:27px;box-shadow:0 9px 28px #0003;z-index:10}
+
+/* Dashboard-style home layout */
+.dashboard-layout{display:grid;grid-template-columns:.82fr 1.18fr;gap:28px;align-items:start}
+.hero{padding:38px 0 55px;background:linear-gradient(135deg,#f1f7ff,#fff)}
+.hero-copy{padding:28px 4px}
+.hero h1{font-size:clamp(42px,5vw,66px);margin:20px 0 16px}
+.hero .lead{font-size:18px;max-width:590px}
+.feature-list{display:grid;gap:14px;margin:25px 0}
+.feature-list>div{display:flex;gap:12px;align-items:center}
+.feature-icon{width:42px;height:42px;border-radius:12px;background:#edf5ff;color:var(--b);display:grid;place-items:center;font-weight:900;font-size:20px}
+.feature-list b{display:block;font-size:15px}
+.feature-list small{display:block;color:var(--m);font-size:13px}
+.quick-box{background:#fff;border:1px solid #dfe7f1;border-radius:18px;padding:18px 20px;margin-top:25px;box-shadow:0 12px 30px #10213d0c}
+.quick-box h3{color:var(--r);margin:0 0 12px;font-size:20px}
+.quick-box p{margin:8px 0;font-size:13px}
+.quick-box a{color:var(--b);font-weight:800}
+.dashboard-wrap{background:#fff;border:1px solid #dfe7f1;border-radius:24px;padding:20px;box-shadow:0 16px 45px #10213d12}
+.service-dashboard{width:100%}
+.dash-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 2px 16px}
+.dash-head h2{margin:2px 0 0;font-size:24px}
+.dash-link{color:var(--b);font-weight:800;font-size:13px}
+.dashboard-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.dash-card{position:relative;min-height:142px;border:1px solid #e1e7ef;border-radius:18px;padding:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#fff;box-shadow:0 8px 20px #10213d08;transition:.2s}
+.dash-card:hover{transform:translateY(-3px);box-shadow:0 14px 28px #10213d16}
+.dash-card.green{border-color:#b8e8d3}.dash-card.pink{border-color:#f4c4d8}.dash-card.orange{border-color:#f6d2b5}.dash-card.yellow{border-color:#eee1b5}.dash-card.blue{border-color:#bcd5f6}.dash-card.purple{border-color:#d8c8f4}
+.tile-icon{width:58px;height:58px;border-radius:16px;display:grid;place-items:center;background:#fff0f6;color:#e01b63;font-size:31px;margin-bottom:10px}
+.green .tile-icon{background:#e9fbf2;color:#10a66a}.yellow .tile-icon{background:#fffbea;color:#dc8700}.orange .tile-icon{background:#fff5eb;color:#f05a00}.gray .tile-icon{background:#f5f7fa;color:#56667c}.blue .tile-icon{background:#eef6ff;color:#1466dc}.purple .tile-icon{background:#f4efff;color:#7546d8}
+.tile-icon.dark{background:#f7f8fa;color:#18263d}
+.dash-card strong{font-size:14px;line-height:1.25}
+.dash-card small{color:var(--m);font-size:10px;margin-top:3px}
+.badge{position:absolute;right:10px;top:10px;background:#ffe1ee;color:#d81b64;padding:4px 7px;border-radius:7px;font-size:10px;font-weight:900}
+.green .badge{background:#dff7eb;color:#148b5e}.yellow .badge{background:#fff0b8;color:#a36b00}.mod{background:#fff0b8;color:#a36b00}
+
+@media(max-width:850px){.hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}.services{grid-template-columns:1fr 1fr}.menu{gap:12px;font-size:14px}}
+@media(max-width:560px){.nav{min-height:68px}.brand{font-size:19px}.logo{width:42px;height:42px}.menu a:not(.navbtn){display:none}.hero{padding:58px 0}.section{padding:60px 0}.services{grid-template-columns:1fr}.head h2{font-size:32px}.foot{flex-direction:column;text-align:center}}
+
+/* Final dashboard-only layout */
+.dashboard-home{padding:28px 0 60px;background:#f6f9fd}
+.dashboard-only{width:100%}
+.dashboard-title{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:20px}
+.dashboard-title h1{font-size:42px;margin:10px 0 4px}
+.dashboard-title p{margin:0;color:var(--m)}
+.dashboard-title .kicker{display:inline-block}
+.dashboard-wrap{width:100%;box-sizing:border-box}
+.dashboard-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.dash-card{min-height:150px}
+@media(max-width:600px){
+.dashboard-home{padding:18px 0 45px}
+.dashboard-title{align-items:flex-start}
+.dashboard-title h1{font-size:30px}
+.dashboard-title p{font-size:13px}
+.dashboard-title .btn{padding:10px 12px;font-size:12px;white-space:nowrap}
+.dashboard-wrap{padding:10px}
+.dashboard-grid{grid-template-columns:1fr 1fr;gap:9px}
+.dash-card{min-height:125px;padding:10px}
+}
+
+
+.location-line{margin:0 0 14px;padding:10px 14px;border-radius:12px;background:#f1f6ff;color:#18263d;font-size:13px;display:flex;gap:7px;align-items:center}
+.location-line span{font-size:17px}
+
+
+/* Small floating WhatsApp button */
+.wa-float{
+  position:fixed!important;
+  right:18px!important;
+  bottom:18px!important;
+  width:52px!important;
+  height:52px!important;
+  min-width:52px!important;
+  min-height:52px!important;
+  border-radius:50%!important;
+  display:grid!important;
+  place-items:center!important;
+  padding:0!important;
+  font-size:24px!important;
+  line-height:1!important;
+  z-index:9999!important;
+  box-shadow:0 6px 18px rgba(0,0,0,.18)!important;
+}
+.wa-float span{display:none!important}
+@media(max-width:600px){
+  .wa-float{
+    right:14px!important;
+    bottom:14px!important;
+    width:48px!important;
+    height:48px!important;
+    min-width:48px!important;
+    min-height:48px!important;
+    font-size:22px!important;
+  }
+}
+
+
+.contact-page{background:#f5f8fc;padding:55px 0 70px}
+.contact-intro{text-align:center;max-width:760px;margin:0 auto 28px}
+.contact-intro h2{font-size:38px;margin:0 0 10px;color:#10213d}
+.contact-intro p{font-size:17px;color:var(--m);margin:0}
+.contact-card,.enquiry-card{background:#fff;border:1px solid #dfe6ef;border-radius:24px;padding:34px 38px;max-width:850px;margin:0 auto 22px;box-shadow:0 10px 30px rgba(16,33,61,.06)}
+.contact-card h2,.enquiry-card h2{font-size:30px;margin:0 0 28px;color:#10213d}
+.contact-item{display:flex;align-items:center;gap:18px;margin:22px 0}
+.contact-icon{width:56px;height:56px;border-radius:16px;background:#ffe9f0;color:#e21b4d;display:grid;place-items:center;font-size:24px;flex:none}
+.contact-item strong{display:block;font-size:18px;color:#10213d;margin-bottom:6px}
+.contact-item span,.contact-item a{display:block;font-size:17px;color:#40516b}
+.contact-item a{color:#1264c4;font-weight:800;text-decoration:none}
+.enquiry-card form{display:grid;gap:14px}
+.enquiry-card input,.enquiry-card textarea{width:100%;box-sizing:border-box;border:1px solid #dfe5ed;border-radius:15px;padding:17px;font:inherit;font-size:16px;outline:none}
+.enquiry-card textarea{min-height:140px;resize:vertical}
+.enquiry-card .btn{border:0;cursor:pointer}
+@media(max-width:600px){
+.contact-page{padding:40px 0 55px}
+.contact-intro h2{font-size:30px}
+.contact-intro p{font-size:15px;line-height:1.55}
+.contact-card,.enquiry-card{padding:28px 24px;border-radius:22px}
+.contact-card h2,.enquiry-card h2{font-size:27px}
+.contact-item{gap:15px}
+.contact-icon{width:52px;height:52px}
+.contact-item strong{font-size:17px}
+.contact-item span,.contact-item a{font-size:16px}
+}
+
+
+/* Mobile dashboard: exactly 2 columns */
+@media (max-width: 600px){
+  .dashboard-grid,
+  .service-dashboard,
+  .services-grid,
+  .services-list{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+  .dash-card,
+  .service-card{
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+
+</style>
 </head>
 <body>
-<header>
-  <nav>
-    <div class="logo"><div class="logo-mark">M</div>Madinaverify</div>
-    <div>
-      <a href="#home">Home</a><a href="#services">Services</a><a href="#about">About</a><a href="#contact">Contact</a>
+<style>
+.auth-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#eef5ff,#fff);z-index:10000;display:flex;align-items:center;justify-content:center;padding:18px;overflow:auto}.auth-box{width:min(430px,100%);background:#fff;border:1px solid #dfe7f1;border-radius:24px;padding:28px;box-shadow:0 20px 60px #10213d20}.auth-logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:24px;color:#075bbb;margin-bottom:20px}.auth-logo span{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;color:#fff;background:linear-gradient(140deg,#075bbb 0 56%,#df1725 56%)}.auth-box h2{margin:0 0 6px;font-size:30px}.auth-box p{color:#607089;margin:0 0 20px}.auth-tabs{display:flex;gap:8px;margin-bottom:18px}.auth-tabs button{flex:1;border:1px solid #d8e1ed;background:#f7f9fc;padding:11px;border-radius:10px;font-weight:800;cursor:pointer}.auth-tabs button.active{background:#075bbb;color:#fff;border-color:#075bbb}.auth-form{display:grid;gap:12px}.auth-form label{font-size:13px;font-weight:800;color:#243653}.auth-form input{margin-top:5px}.auth-submit{border:0;cursor:pointer;padding:14px;border-radius:12px;font-weight:900;background:#df1725;color:#fff;font-size:16px}.auth-msg{min-height:20px;font-size:13px;font-weight:700}.logout{background:#10213d;color:#fff;border:0;padding:9px 13px;border-radius:9px;font-weight:800;cursor:pointer}.user-chip{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:800}.hidden{display:none!important}@media(max-width:600px){.auth-box{padding:22px}.auth-box h2{font-size:26px}.user-chip{display:none}}
+</style>
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-box">
+    <div class="auth-logo"><span>M</span>Madinaverify</div>
+    <div class="auth-tabs"><button id="loginTab" class="active" type="button" onclick="showAuth('login')">Login</button><button id="registerTab" type="button" onclick="showAuth('register')">Register</button></div>
+    <div id="loginPanel">
+      <h2>Welcome back</h2><p>Login to access your Madinaverify dashboard.</p>
+      <form class="auth-form" onsubmit="loginUser(event)"><label>Email<input id="loginEmail" type="email" required placeholder="you@example.com"></label><label>Password<input id="loginPassword" type="password" required placeholder="Your password"></label><button class="auth-submit" type="submit">Login</button><div class="auth-msg" id="loginMsg"></div></form>
     </div>
-  </nav>
-</header>
-
-<main>
-<section class="hero" id="home">
-  <div class="hero-inner">
-    <div>
-      <span class="badge">GERA • Rigasa, Kaduna</span>
-      <h1>Madinaverify<br><span>Reliable Service</span></h1>
-      <p>Muna taimaka wa kwastomomi samun sabis cikin sauƙi, sauri da tsari. Tuntube mu domin ƙarin bayani.</p>
-      <a class="btn primary" href="https://wa.me/message/63PXMLC44ZGBE1" target="_blank">💬 WhatsApp</a>
-      <a class="btn secondary" href="#services">Duba Services</a>
-    </div>
-    <div class="card">
-      <h3>Madinaverify</h3>
-      <p><strong>Sabis:</strong> GERA</p>
-      <p><strong>Wuri:</strong> NOT 1 BOSSTOP ROAD, RIGASA, KADUNA</p>
-      <p><strong>Waya:</strong> 09163385341</p>
+    <div id="registerPanel" class="hidden">
+      <h2>Create account</h2><p>Register before using the dashboard.</p>
+      <form class="auth-form" onsubmit="registerUser(event)"><label>Full name<input id="regName" required placeholder="Your full name"></label><label>Email<input id="regEmail" type="email" required placeholder="you@example.com"></label><label>Phone<input id="regPhone" type="tel" required placeholder="Phone number"></label><label>Password<input id="regPassword" type="password" minlength="6" required placeholder="At least 6 characters"></label><button class="auth-submit" type="submit">Create account</button><div class="auth-msg" id="regMsg"></div></form>
     </div>
   </div>
-</section>
+</div>
 
-<section id="services">
+<header><div class="wrap nav">
+<a class="brand" href="#home"><span class="logo">M</span>Madinaverify</a>
+<nav class="menu"><a href="#home">Home</a><a href="#services">Services</a><a href="#contact">Contact</a><span class="user-chip" id="userChip"></span><button class="logout" onclick="logoutUser()">Logout</button></nav>
+</div></header>
+
+
+
+<section class="hero dashboard-home" id="home">
   <div class="wrap">
-    <div class="title"><h2>Our Services</h2><p>Ayyukan Madinaverify</p></div>
-    <div class="services">
-      <div class="service"><b>01. Customer Support</b><p>Taimako da jagoranci ga kwastomomi.</p></div>
-      <div class="service"><b>02. GERA Service</b><p>Sabis na GERA cikin tsari.</p></div>
-      <div class="service"><b>03. Registration Assistance</b><p>Taimakon cike bayanai da rajista.</p></div>
-      <div class="service"><b>04. Data Verification</b><p>Taimakon duba bayanan da aka shigar.</p></div>
-      <div class="service"><b>05. User Onboarding</b><p>Taimakon fara amfani da sabis.</p></div>
-      <div class="service"><b>06. Account Assistance</b><p>Taimako kan matsalolin account.</p></div>
-      <div class="service"><b>07. Information Service</b><p>Bayar da bayanai kan ayyukanmu.</p></div>
-      <div class="service"><b>08. Form Assistance</b><p>Taimakon shirya bayanan forms.</p></div>
-      <div class="service"><b>09. Document Guidance</b><p>Jagora kan takardun da ake buƙata.</p></div>
-      <div class="service"><b>10. Status Checking</b><p>Taimako wajen bin diddigin status.</p></div>
-      <div class="service"><b>11. Customer Follow-up</b><p>Bin diddigin buƙatun kwastomomi.</p></div>
-      <div class="service"><b>12. Digital Assistance</b><p>Taimakon amfani da hanyoyin zamani.</p></div>
-      <div class="service"><b>13. General Enquiries</b><p>Amsa tambayoyin kwastomomi.</p></div>
-      <div class="service"><b>14. Service Guidance</b><p>Bayani kan matakan samun sabis.</p></div>
-      <div class="service"><b>15. Contact Support</b><p>Hanyar tuntuɓar mu cikin sauƙi.</p></div>
-    </div>
-  </div>
-</section>
-
-<section class="about" id="about">
-  <div class="wrap about-grid">
+    <div class="dashboard-only">
+      <div class="dashboard-title">
+        <div>
+          <span class="kicker">● NIN & BVN SERVICES</span>
+          <h1>Dashboard</h1>
+          <p>Welcome to Madinaverify. Select a service below.</p>
+        </div>
+        <a class="btn blue" href="https://wa.me/message/63PXMLC44ZGBE1" target="_blank">💬 WhatsApp</a>
+      </div>
+      <div class="location-line"><span>📍</span><b>Address:</b> Kaduna, Nigeria</div>
+      <div class="dashboard-wrap">
+<div class="service-dashboard" id="services">
+  <div class="dash-head">
     <div>
-      <div class="title" style="text-align:left;margin-bottom:15px"><h2>About Madinaverify</h2></div>
-      <p>Madinaverify na aiki a Rigasa, Kaduna, domin samar da taimako da jagoranci ga kwastomomi masu buƙatar ayyukan GERA da sauran ayyukanmu.</p>
-      <p>Muna ƙoƙarin yin aiki cikin tsari da sadarwa mai sauƙi.</p>
+      <div class="eyebrow">Available services</div>
+      <h2>Verification &amp; Support</h2>
     </div>
-    <div class="card">
-      <h3>Ku zo ku same mu</h3>
-      <p>NOT 1 BOSSTOP ROAD<br>RIGASA, KADUNA</p>
-      <a class="btn primary" href="tel:09163385341">📞 09163385341</a>
+    <a class="dash-link" href="#contact">Contact Us →</a>
+  </div>
+  <div class="dashboard-grid">
+    <a class="dash-card pink" href="#contact"><span class="badge">NIN</span><span class="tile-icon">▣</span><strong>NIN Verification</strong><small>Identity verification</small></a>
+    <a class="dash-card green" href="#contact"><span class="badge">BVN</span><span class="tile-icon">◉</span><strong>BVN Verification</strong><small>Bank verification</small></a>
+    <a class="dash-card white" href="#contact"><span class="badge">NIN</span><span class="tile-icon dark">◎</span><strong>Personalization</strong><small>Profile assistance</small></a>
+    <a class="dash-card yellow" href="#contact"><span class="badge">NIN</span><span class="tile-icon">▦</span><strong>IPE Clearance</strong><small>Clearance support</small></a>
+    <a class="dash-card orange" href="#contact"><span class="badge">NIN</span><span class="tile-icon">♢</span><strong>Validation</strong><small>Data validation</small></a>
+    <a class="dash-card gray" href="#contact"><span class="badge mod">MOD</span><span class="tile-icon dark">▱</span><strong>Modifications</strong><small>Record updates</small></a>
+    <a class="dash-card pink" href="#contact"><span class="badge">NIN</span><span class="tile-icon">♙</span><strong>Enrollments</strong><small>Enrollment support</small></a>
+    <a class="dash-card yellow" href="#contact"><span class="badge">NIN</span><span class="tile-icon dark">✥</span><strong>Birth Attestation</strong><small>Attestation guidance</small></a>
+    <a class="dash-card pink" href="#contact"><span class="badge">NIN</span><span class="tile-icon">▣</span><strong>Suspended NIN</strong><small>Support and guidance</small></a>
+    <a class="dash-card pink" href="#contact"><span class="badge">NIN</span><span class="tile-icon">⌂</span><strong>CAC Registration</strong><small>Business registration</small></a>
+    <a class="dash-card green" href="#contact"><span class="badge">BVN</span><span class="tile-icon">⌘</span><strong>BVN Retrieval</strong><small>Retrieval assistance</small></a>
+    <a class="dash-card pink" href="#contact"><span class="badge">NIN</span><span class="tile-icon">⌑</span><strong>NIN Revalidation</strong><small>Revalidation support</small></a>
+    <a class="dash-card purple" href="#contact"><span class="badge">NIN</span><span class="tile-icon">▤</span><strong>Document Verification</strong><small>Document checks</small></a>
+    <a class="dash-card blue" href="#contact"><span class="badge">BVN</span><span class="tile-icon">◔</span><strong>BVN Monitoring</strong><small>Monitoring support</small></a>
+    <a class="dash-card gray" href="#contact"><span class="badge">HELP</span><span class="tile-icon dark">?</span><strong>Customer Support</strong><small>Get assistance</small></a>
+  </div>
+</div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact">
+
+<section class="section" id="contact"><div class="wrap"><div class="head"><h2>Contact Madinaverify</h2><p>We are here to answer your questions and provide the assistance you need.</p></div>
+<div class="contact-grid"><div class="contact-card"><h2>Contact Details</h2><div class="contact-list">
+<div class="contact-item"><span class="ico">☎</span><div><b>Phone</b><br>09163385341</div></div>
+<div class="contact-item"><span class="ico">⌖</span><div><b>Address</b><br></div></div>
+<div class="contact-item"><span class="ico">💬</span><div><b>WhatsApp</b><br><a style="color:var(--b);font-weight:800" href="https://wa.me/message/63PXMLC44ZGBE1" target="_blank">Start a WhatsApp chat</a></div></div>
+</div></div>
+<div class="contact-card"><h2>Send an enquiry</h2><form onsubmit="sendWA(event)"><input id="name" required placeholder="Your name"><input id="phone" placeholder="Phone number"><textarea id="msg" required placeholder="How can we help you?"></textarea><button class="btn red" type="submit">Send via WhatsApp →</button><div class="note">Your message opens in WhatsApp; this website does not store the form.</div></form></div></div></div></section>
+
+
+<section class="section contact-page" id="contact">
   <div class="wrap">
-    <div class="title"><h2>Contact Us</h2><p>Tuntuɓe mu yanzu</p></div>
-    <div class="contact-grid">
-      <div class="contact-box"><strong>📞 Phone</strong>09163385341</div>
-      <div class="contact-box"><strong>📍 Address</strong>NOT 1 BOSSTOP ROAD, RIGASA, KADUNA</div>
-      <div class="contact-box"><strong>💬 WhatsApp</strong><a href="https://wa.me/message/63PXMLC44ZGBE1" target="_blank">Chat with us on WhatsApp</a></div>
-      <div class="contact-box"><strong>🏢 Service</strong>GERA</div>
+    <div class="contact-intro">
+      <h2>Contact Madinaverify</h2>
+      <p>We are here to answer your questions and provide the assistance you need.</p>
+    </div>
+
+    <div class="contact-card">
+      <h2>Contact Details</h2>
+
+      <div class="contact-item">
+        <div class="contact-icon">☎</div>
+        <div><strong>Phone</strong><span>09163385341</span></div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">⌖</div>
+        <div><strong>Address</strong><span>Kaduna, Nigeria</span></div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">💬</div>
+        <div>
+          <strong>WhatsApp</strong>
+          <a href="https://wa.me/message/63PXMLC44ZGBE1" target="_blank">Start a WhatsApp chat</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="enquiry-card">
+      <h2>Send an enquiry</h2>
+      <form onsubmit="return sendToWhatsApp()">
+        <input id="enqName" type="text" placeholder="Your name" required>
+        <input id="enqPhone" type="tel" placeholder="Phone number" required>
+        <textarea id="enqMessage" placeholder="How can we help you?" required></textarea>
+        <button class="btn red" type="submit">Send via WhatsApp</button>
+      </form>
     </div>
   </div>
 </section>
-</main>
 
-<a class="whatsapp" href="https://wa.me/message/63PXMLC44ZGBE1" target="_blank" aria-label="WhatsApp">☏</a>
-<footer>© 2026 Madinaverify — GERA • Rigasa, Kaduna</footer>
-</body>
-</html>
+<footer><div class="wrap foot"><div><b>Madinaverify</b><br>NIN & BVN SERVICES</div><div>© 2026 Madinaverify. All rights reserved.</div></div></footer>
+<a class="float" href="https://wa.me/message/63PXMLC44ZGBE1" target="_blank" aria-label="WhatsApp">💬</a>
+<script>
+function sendWA(e){e.preventDefault();let n=document.getElementById('name').value,p=document.getElementById('phone').value,m=document.getElementById('msg').value;
+let text=encodeURIComponent('Hello Madinaverify,\n\nName: '+n+'\nPhone: '+p+'\nMessage: '+m);
+window.open('https://wa.me/message/63PXMLC44ZGBE1?text='+text,'_blank')}
+</script>
+
+<script>
+function sendToWhatsApp(){
+  const name=document.getElementById('enqName').value.trim();
+  const phone=document.getElementById('enqPhone').value.trim();
+  const message=document.getElementById('enqMessage').value.trim();
+  const text=`Hello Madinaverify,%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0AEnquiry: ${encodeURIComponent(message)}`;
+  window.open('https://wa.me/message/63PXMLC44ZGBE1?text='+text,'_blank');
+  return false;
+}
+</script>
+
+
+<script>
+const AUTH_KEY='madinaverify_users_v1';
+const SESSION_KEY='madinaverify_session_v1';
+function users(){try{return JSON.parse(localStorage.getItem(AUTH_KEY)||'[]')}catch(e){return []}}
+function saveUsers(u){localStorage.setItem(AUTH_KEY,JSON.stringify(u))}
+function showAuth(mode){const login=mode==='login';document.getElementById('loginPanel').classList.toggle('hidden',!login);document.getElementById('registerPanel').classList.toggle('hidden',login);document.getElementById('loginTab').classList.toggle('active',login);document.getElementById('registerTab').classList.toggle('active',!login);document.getElementById('loginMsg').textContent='';document.getElementById('regMsg').textContent=''}
+function registerUser(e){e.preventDefault();const name=document.getElementById('regName').value.trim(),email=document.getElementById('regEmail').value.trim().toLowerCase(),phone=document.getElementById('regPhone').value.trim(),password=document.getElementById('regPassword').value;if(users().some(u=>u.email===email)){document.getElementById('regMsg').textContent='An account with this email already exists.';return}const u=users();u.push({name,email,phone,password});saveUsers(u);localStorage.setItem(SESSION_KEY,JSON.stringify({name,email,phone}));enterSite()}
+function loginUser(e){e.preventDefault();const email=document.getElementById('loginEmail').value.trim().toLowerCase(),password=document.getElementById('loginPassword').value,u=users().find(x=>x.email===email&&x.password===password);if(!u){document.getElementById('loginMsg').textContent='Incorrect email or password.';return}localStorage.setItem(SESSION_KEY,JSON.stringify({name:u.name,email:u.email,phone:u.phone}));enterSite()}
+function enterSite(){document.getElementById('authOverlay').classList.add('hidden');const s=JSON.parse(localStorage.getItem(SESSION_KEY)||'null');if(s)document.getElementById('userChip').textContent='Hi, '+s.name.split(' ')[0]}
+function logoutUser(){localStorage.removeItem(SESSION_KEY);document.getElementById('authOverlay').classList.remove('hidden');showAuth('login')}
+window.addEventListener('DOMContentLoaded',()=>{const s=localStorage.getItem(SESSION_KEY);if(s)enterSite();else showAuth('login')});
+</script>
+</body></html>
