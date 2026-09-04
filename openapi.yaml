@@ -1,0 +1,85 @@
+openapi: 3.0.3
+info:
+  title: Madinaverify API
+  version: 1.0.0
+  description: REST API contract for Madinaverify identity and business verification.
+servers:
+  - url: https://api.madinaverify.com.ng/api/v1
+security:
+  - bearerAuth: []
+paths:
+  /health:
+    get:
+      security: []
+      summary: Health check
+      responses:
+        "200":
+          description: OK
+  /verification/nin:
+    post:
+      summary: NIN verification request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConsentVerification"
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Invalid request
+        "401":
+          description: Unauthorized
+  /verification/bvn:
+    post:
+      summary: BVN verification request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConsentVerification"
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          description: Invalid request
+        "401":
+          description: Unauthorized
+  /verification/cac:
+    post:
+      summary: CAC verification request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [registrationNumber]
+              properties:
+                registrationNumber:
+                  type: string
+      responses:
+        "202":
+          description: Accepted
+        "401":
+          description: Unauthorized
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API key
+  schemas:
+    ConsentVerification:
+      type: object
+      required: [consent]
+      properties:
+        nin:
+          type: string
+        bvn:
+          type: string
+        consent:
+          type: boolean
+          example: true

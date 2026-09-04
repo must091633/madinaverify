@@ -1,0 +1,1034 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "IdentityVerify Nigeria - BVN, NIN & CAC Verification API",
+    "version": "2.4.0",
+    "description": "Official API specification for Nigerian banking and regulatory compliance: Bank Verification Number (BVN / NIBSS), National Identification Number (NIN / NIMC vNIN), and Corporate Affairs Commission (CAC / CAMA 2020) corporate registries.",
+    "contact": {
+      "name": "API Support & Compliance",
+      "email": "api-support@identityverify.ng",
+      "url": "https://identityverify.ng"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://sandbox.identityverify.ng",
+      "description": "Sandbox Testing Environment (Zero charge)"
+    },
+    {
+      "url": "https://api.identityverify.ng",
+      "description": "Production Live Environment"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "API Secret Key (sec_live_... / sec_test_...)"
+      }
+    }
+  },
+  "paths": {
+    "/v2/bvn/verify-basic": {
+      "post": {
+        "summary": "Basic BVN Validation",
+        "description": "Validates whether the supplied 11-digit BVN exists in the NIBSS (Nigeria Inter-Bank Settlement System) repository. Returns the registration validity, enrollment status, and masked holder full name for fast and affordable level-1 KYC verification.",
+        "operationId": "bvn-verify-basic",
+        "tags": [
+          "BVN"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bvn": {
+                    "type": "string",
+                    "description": "11-digit Nigerian Bank Verification Number",
+                    "example": "22187394012"
+                  },
+                  "customer_consent": {
+                    "type": "boolean",
+                    "description": "Explicit confirmation that user consented to BVN validation under NDPR regulations",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "bvn",
+                  "customer_consent"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "BVN successfully validated against central banking repository",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "BVN_VALID",
+                    "message": "Bank Verification Number validated successfully.",
+                    "data": {
+                      "bvn": "22187394012",
+                      "is_valid": true,
+                      "status": "active",
+                      "masked_name": "ADEBAYO O*** I***",
+                      "first_name": "Adebayo",
+                      "last_name": "Ibrahim",
+                      "middle_name": "Oluwaseun",
+                      "enrollment_bank": "058 - GUARANTY TRUST BANK PLC",
+                      "enrollment_branch": "Victoria Island 2, Lagos",
+                      "watchlisted": false,
+                      "verified_at": "2026-09-02T16:44:12Z"
+                    },
+                    "meta": {
+                      "charge_applied": 25,
+                      "currency": "NGN",
+                      "request_id": "req_bvn_882910472"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "BVN does not exist in the NIBSS central switch",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "error",
+                    "code": "BVN_NOT_FOUND",
+                    "message": "No record found for the supplied 11-digit BVN in the NIBSS registry.",
+                    "meta": {
+                      "request_id": "req_bvn_err_9012"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/bvn/lookup-full": {
+      "post": {
+        "summary": "Full BVN Demographics & Photo",
+        "description": "Performs comprehensive Tier-3 KYC verification on a customer BVN. Returns full name, verified date of birth, registered phone number, gender, state of origin, LGA of origin, residential address, registration date, and official photo.",
+        "operationId": "bvn-lookup-full",
+        "tags": [
+          "BVN"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bvn": {
+                    "type": "string",
+                    "description": "11-digit Bank Verification Number",
+                    "example": "22187394012"
+                  },
+                  "customer_consent": {
+                    "type": "boolean",
+                    "description": "Mandatory NDPR compliance flag",
+                    "example": true
+                  },
+                  "include_photo": {
+                    "type": "boolean",
+                    "description": "Whether to return the base64 encoded photo record (defaults to true)",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "bvn",
+                  "customer_consent"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete verified KYC demographic record returned",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "BVN_FULL_RETRIEVED",
+                    "message": "Full demographic data retrieved successfully.",
+                    "data": {
+                      "bvn": "22187394012",
+                      "first_name": "Adebayo",
+                      "middle_name": "Oluwaseun",
+                      "surname": "Ibrahim",
+                      "date_of_birth": "1992-04-14",
+                      "phone_number": "+2348039201847",
+                      "gender": "Male",
+                      "state_of_origin": "Oyo State",
+                      "lga_of_origin": "Ibadan North",
+                      "residential_address": "Plot 14, Admiralty Way, Lekki Phase 1, Lagos State",
+                      "enrollment_bank": "058 - GUARANTY TRUST BANK PLC",
+                      "enrollment_branch": "Victoria Island 2, Lagos",
+                      "enrollment_date": "2014-06-12",
+                      "watchlisted": false,
+                      "photo_base64": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD...",
+                      "nin_linked": "48392019482",
+                      "verified_at": "2026-09-02T16:45:01Z"
+                    },
+                    "meta": {
+                      "charge_applied": 65,
+                      "currency": "NGN",
+                      "request_id": "req_bvn_full_392018"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "BVN is flagged on the NIBSS anti-fraud watchlist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "warning",
+                    "code": "BVN_WATCHLISTED_FLAG",
+                    "message": "Subject BVN is listed on the NIBSS AML/Watchlist alert registry. Flagged by reporting institution.",
+                    "data": {
+                      "bvn": "22019284719",
+                      "watchlisted": true,
+                      "watchlist_category": "9002 - PENDING_AML_INQUIRY",
+                      "alert_issued_date": "2025-11-14"
+                    },
+                    "meta": {
+                      "request_id": "req_bvn_watch_1092"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/bvn/advance-match": {
+      "post": {
+        "summary": "BVN Advance Match (Name & DoB)",
+        "description": "Calculates high-accuracy fuzzy matching scores across first name, surname, middle name, date of birth, and phone number against the verified BVN profile. Eliminates friction caused by variations in Nigerian naming order or alternate spellings.",
+        "operationId": "bvn-advance-match",
+        "tags": [
+          "BVN"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bvn": {
+                    "type": "string",
+                    "description": "11-digit BVN",
+                    "example": "22187394012"
+                  },
+                  "first_name": {
+                    "type": "string",
+                    "description": "First name provided by user",
+                    "example": "Adebayo"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "description": "Last name / Surname provided by user",
+                    "example": "Ibrahim"
+                  },
+                  "date_of_birth": {
+                    "type": "string",
+                    "description": "Date of birth (YYYY-MM-DD)",
+                    "example": "1992-04-14"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "description": "Phone number in E.164 or local format",
+                    "example": "+2348039201847"
+                  },
+                  "customer_consent": {
+                    "type": "boolean",
+                    "description": "NDPR user consent acknowledgment",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "bvn",
+                  "first_name",
+                  "last_name",
+                  "customer_consent"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Comprehensive fuzzy matching confidence metrics",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "BVN_MATCH_SUCCESS",
+                    "data": {
+                      "bvn": "22187394012",
+                      "match_status": "ACCEPTED",
+                      "overall_confidence": 96.5,
+                      "field_scores": {
+                        "first_name": {
+                          "score": 100,
+                          "status": "EXACT_MATCH",
+                          "submitted": "Adebayo",
+                          "registered": "Adebayo"
+                        },
+                        "last_name": {
+                          "score": 100,
+                          "status": "EXACT_MATCH",
+                          "submitted": "Ibrahim",
+                          "registered": "Ibrahim"
+                        },
+                        "date_of_birth": {
+                          "score": 100,
+                          "status": "EXACT_MATCH",
+                          "submitted": "1992-04-14",
+                          "registered": "1992-04-14"
+                        },
+                        "phone_number": {
+                          "score": 95,
+                          "status": "MATCH",
+                          "submitted": "+2348039201847",
+                          "registered": "08039201847"
+                        }
+                      },
+                      "recommendation": "AUTOMATED_APPROVAL",
+                      "verified_at": "2026-09-02T16:45:22Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/bvn/match-face": {
+      "post": {
+        "summary": "BVN Biometric Face Match",
+        "description": "Submits a live selfie image (or base64 capture with optional liveness detection) and performs 1:1 facial geometry comparison against the official photo stored in the NIBSS BVN database. Returns biometric match confidence percentage and liveness score.",
+        "operationId": "bvn-match-face",
+        "tags": [
+          "BVN"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bvn": {
+                    "type": "string",
+                    "description": "11-digit BVN",
+                    "example": "22187394012"
+                  },
+                  "selfie_image": {
+                    "type": "string",
+                    "description": "Base64 encoded JPEG/PNG image or public HTTPS URL",
+                    "example": "data:image/jpeg;base64,/9j/4AAQSkZJRg..."
+                  },
+                  "check_liveness": {
+                    "type": "boolean",
+                    "description": "Perform 3D passive anti-spoofing check",
+                    "example": true
+                  },
+                  "customer_consent": {
+                    "type": "boolean",
+                    "description": "NDPR compliance flag",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "bvn",
+                  "selfie_image",
+                  "customer_consent"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Facial comparison passed above safety threshold",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "FACE_MATCH_VERIFIED",
+                    "data": {
+                      "bvn": "22187394012",
+                      "matched": true,
+                      "face_confidence_score": 94.8,
+                      "threshold_required": 80,
+                      "liveness_result": {
+                        "passed": true,
+                        "liveness_score": 99.1,
+                        "anti_spoofing": "GENUINE_HUMAN_FACE"
+                      },
+                      "verified_at": "2026-09-02T16:46:00Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/nin/verify-vnin": {
+      "post": {
+        "summary": "Virtual NIN (vNIN) Verification",
+        "description": "The mandatory privacy-protecting tokenization protocol introduced by the National Identity Management Commission (NIMC) and endorsed by the Central Bank of Nigeria. Users generate a 16-character alphanumeric code using USSD code *346*3*NIN*EnterpriseID# or the NIMC MWS Mobile ID App. Returns verified demographic profile without exposing the raw 11-digit NIN.",
+        "operationId": "nin-verify-vnin",
+        "tags": [
+          "NIN"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "vnin": {
+                    "type": "string",
+                    "description": "16-character alphanumeric token",
+                    "example": "AB4839201948NG01"
+                  },
+                  "agent_enterprise_id": {
+                    "type": "string",
+                    "description": "Your assigned NIMC Enterprise Agent Code (defaults to your organization code)",
+                    "example": "IDV-NIMC-7489"
+                  },
+                  "customer_consent": {
+                    "type": "boolean",
+                    "description": "NDPR compliance confirmation",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "vnin",
+                  "customer_consent"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Citizen demographic record from NIMC national database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "VNIN_VALIDATED",
+                    "message": "Virtual NIN verified successfully.",
+                    "data": {
+                      "vnin": "AB4839201948NG01",
+                      "first_name": "Adebayo",
+                      "surname": "Ibrahim",
+                      "middle_name": "Oluwaseun",
+                      "date_of_birth": "1992-04-14",
+                      "gender": "M",
+                      "mobile_number": "+2348039201847",
+                      "state_of_origin": "Oyo State",
+                      "lga_of_origin": "Ibadan North",
+                      "address": "Plot 14 Admiralty Way, Lekki Phase 1, Lagos",
+                      "title": "Mr",
+                      "tracking_id": "TRK-NIMC-9920184",
+                      "photo": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD...",
+                      "verified_at": "2026-09-02T16:46:45Z"
+                    },
+                    "meta": {
+                      "charge_applied": 50,
+                      "currency": "NGN",
+                      "request_id": "req_nin_vnin_77218"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "vNIN is older than 72 hours or already consumed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "error",
+                    "code": "VNIN_EXPIRED_OR_USED",
+                    "message": "Supplied Virtual NIN token is invalid, expired, or has previously been consumed by an enterprise reader.",
+                    "meta": {
+                      "request_id": "req_nin_err_410"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/nin/lookup-direct": {
+      "post": {
+        "summary": "Enterprise Direct 11-Digit NIN Lookup",
+        "description": "Enterprise tier direct verification against the National Identity Management Commission database using the 11-digit National Identity Number. Requires designated NIMC aggregator license or licensed financial institution credentials.",
+        "operationId": "nin-lookup-direct",
+        "tags": [
+          "NIN"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nin": {
+                    "type": "string",
+                    "description": "11-digit National Identification Number",
+                    "example": "48392019482"
+                  },
+                  "customer_consent": {
+                    "type": "boolean",
+                    "description": "Explicit NDPR agreement confirmation",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "nin",
+                  "customer_consent"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Complete NIMC registration record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "NIN_RETRIEVED",
+                    "data": {
+                      "nin": "48392019482",
+                      "first_name": "Adebayo",
+                      "middle_name": "Oluwaseun",
+                      "surname": "Ibrahim",
+                      "date_of_birth": "1992-04-14",
+                      "gender": "Male",
+                      "telephone_no": "+2348039201847",
+                      "state_of_origin": "Oyo State",
+                      "lga_of_origin": "Ibadan North",
+                      "residence_state": "Lagos State",
+                      "photo": "data:image/jpeg;base64,/9j/4AAQSkZJRg...",
+                      "signature": "data:image/png;base64,iVBORw0KGgoAAA...",
+                      "verified_at": "2026-09-02T16:47:10Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/nin/phone-match": {
+      "post": {
+        "summary": "NIN-to-SIM Phone Match",
+        "description": "Cross-references the Nigerian Communications Commission (NCC) SIM-NIN linkage database to confirm whether a designated phone number is registered and active under the provided NIN or vNIN.",
+        "operationId": "nin-phone-match",
+        "tags": [
+          "NIN"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nin": {
+                    "type": "string",
+                    "description": "11-digit NIN or 16-char vNIN",
+                    "example": "48392019482"
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "description": "Mobile phone number (e.g. +2348039201847 or 08039201847)",
+                    "example": "+2348039201847"
+                  },
+                  "customer_consent": {
+                    "type": "boolean",
+                    "description": "Consent confirmation",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "nin",
+                  "phone_number",
+                  "customer_consent"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "NIN SIM linkage confirmation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "PHONE_MATCH_VERIFIED",
+                    "data": {
+                      "nin_masked": "483*****482",
+                      "phone_number": "+2348039201847",
+                      "is_linked": true,
+                      "network_carrier": "MTN Nigeria",
+                      "sim_registration_status": "ACTIVE_AND_KYC_COMPLIANT",
+                      "verified_at": "2026-09-02T16:47:30Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/cac/search": {
+      "post": {
+        "summary": "CAC Corporate Search",
+        "description": "Queries the official Corporate Affairs Commission registry by company name, RC number, Business Name (BN) number, or Incorporated Trustee (IT) number. Returns a list of matched entities with classification, active operational status, and registration date.",
+        "operationId": "cac-search",
+        "tags": [
+          "CAC"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "search_term": {
+                    "type": "string",
+                    "description": "Company name keyword or RC/BN registration code",
+                    "example": "ZENITH LOGISTICS"
+                  },
+                  "classification": {
+                    "type": "string",
+                    "description": "Filter by entity type (ALL, RC, BN, IT, LLC)",
+                    "example": "RC"
+                  }
+                },
+                "required": [
+                  "search_term"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of matching corporate entities in Nigeria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "CAC_SEARCH_SUCCESS",
+                    "data": {
+                      "total_found": 1,
+                      "entities": [
+                        {
+                          "rc_number": "RC-1492018",
+                          "company_name": "ZENITH LOGISTICS & HAULAGE NIGERIA LTD",
+                          "classification": "Private Company Limited by Shares",
+                          "registration_date": "2018-03-15",
+                          "status": "ACTIVE",
+                          "address": "12 Kofo Abayomi Street, Victoria Island, Lagos State",
+                          "state": "Lagos State",
+                          "lga": "Eti-Osa",
+                          "tax_identification_number": "20819402-0001"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/cac/company/{rc_number}": {
+      "get": {
+        "summary": "CAC Company Profile Lookup",
+        "description": "Fetches the exhaustive CAC profile for any registered Nigerian entity by its RC, BN, or IT number. Details include incorporation date, company type, head office address, authorized share capital, and compliance with statutory annual returns.",
+        "operationId": "cac-company-detail",
+        "tags": [
+          "CAC"
+        ],
+        "parameters": [
+          {
+            "name": "rc_number",
+            "in": "path",
+            "required": true,
+            "description": "Corporate registry number (e.g. RC-1492018 or BN-2849102)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Complete corporate profile record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "CAC_COMPANY_PROFILE",
+                    "data": {
+                      "rc_number": "RC-1492018",
+                      "company_name": "ZENITH LOGISTICS & HAULAGE NIGERIA LTD",
+                      "company_type": "PRIVATE_COMPANY_LIMITED_BY_SHARES",
+                      "status": "ACTIVE",
+                      "registration_date": "2018-03-15",
+                      "authorized_share_capital": 10000000,
+                      "currency": "NGN",
+                      "registered_office_address": "12 Kofo Abayomi Street, Victoria Island, Lagos State",
+                      "head_office_email": "compliance@zenithlogistics.ng",
+                      "state": "Lagos State",
+                      "lga": "Eti-Osa",
+                      "tax_identification_number": "20819402-0001",
+                      "annual_returns": {
+                        "last_filed_year": 2025,
+                        "filing_status": "UP_TO_DATE",
+                        "next_due_date": "2026-06-30"
+                      },
+                      "verified_at": "2026-09-02T16:48:01Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/cac/company/{rc_number}/directors": {
+      "get": {
+        "summary": "CAC Directors & Persons with Significant Control (PSC)",
+        "description": "Extracts the official register of Directors, Company Secretary, Shareholders, and Persons with Significant Control (PSC) as recorded in the Corporate Affairs Commission depository under CAMA 2020 beneficial ownership transparency guidelines.",
+        "operationId": "cac-directors-psc",
+        "tags": [
+          "CAC"
+        ],
+        "parameters": [
+          {
+            "name": "rc_number",
+            "in": "path",
+            "required": true,
+            "description": "Company RC number",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Full list of corporate officers and ultimate beneficial owners",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "CAC_OFFICERS_RETRIEVED",
+                    "data": {
+                      "rc_number": "RC-1492018",
+                      "company_name": "ZENITH LOGISTICS & HAULAGE NIGERIA LTD",
+                      "officers": [
+                        {
+                          "id": "off_01",
+                          "name": "ADEBAYO OLUWASEUN IBRAHIM",
+                          "role": "DIRECTOR",
+                          "designation": "Managing Director / CEO",
+                          "appointment_date": "2018-03-15",
+                          "nationality": "Nigerian",
+                          "shareholding_percentage": 60,
+                          "is_psc": true,
+                          "psc_control_nature": "VOTING_RIGHTS_EXCEEDING_25_PERCENT"
+                        },
+                        {
+                          "id": "off_02",
+                          "name": "FOLAKE MODUPE BELLO",
+                          "role": "DIRECTOR",
+                          "designation": "Executive Director Operations",
+                          "appointment_date": "2019-01-10",
+                          "nationality": "Nigerian",
+                          "shareholding_percentage": 40,
+                          "is_psc": true,
+                          "psc_control_nature": "VOTING_RIGHTS_EXCEEDING_25_PERCENT"
+                        },
+                        {
+                          "id": "off_03",
+                          "name": "KAYODE & PARTNERS LP",
+                          "role": "COMPANY_SECRETARY",
+                          "appointment_date": "2018-03-15",
+                          "accreditation_number": "CAC/SEC/09182",
+                          "nationality": "Nigerian"
+                        }
+                      ],
+                      "psc_register_status": "COMPLIANT_WITH_CAMA_2020",
+                      "verified_at": "2026-09-02T16:48:30Z"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/cac/status-report": {
+      "post": {
+        "summary": "CAC Official Status Report",
+        "description": "Generates an official electronic status certificate from the Corporate Affairs Commission indicating current legal standing, good standing certificate status, registered liens/charges, and annual return filings.",
+        "operationId": "cac-status-report",
+        "tags": [
+          "CAC"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rc_number": {
+                    "type": "string",
+                    "description": "RC, BN or IT number",
+                    "example": "RC-1492018"
+                  },
+                  "generate_pdf": {
+                    "type": "boolean",
+                    "description": "Include signed PDF download link",
+                    "example": true
+                  }
+                },
+                "required": [
+                  "rc_number"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Certified CAC legal status confirmation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "CAC_REPORT_GENERATED",
+                    "data": {
+                      "certificate_number": "CAC-CERT-2026-992014",
+                      "rc_number": "RC-1492018",
+                      "company_name": "ZENITH LOGISTICS & HAULAGE NIGERIA LTD",
+                      "legal_status": "ACTIVE_GOOD_STANDING",
+                      "has_undischarged_charges": false,
+                      "registered_charges_count": 0,
+                      "annual_returns_compliant": true,
+                      "pdf_download_url": "https://cdn.identityverify.ng/reports/cac-cert-rc1492018-signed.pdf",
+                      "issued_at": "2026-09-02T16:49:00Z",
+                      "signature_hash": "sha256:7f9a8b1c02e3f4a5..."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/v2/webhooks/test": {
+      "post": {
+        "summary": "Test Webhook Dispatch",
+        "description": "Dispatches test event payloads to your registered webhook URL endpoint with HMAC SHA-256 signature in the `X-IdentityVerify-Signature` header for local debugging and integration validation.",
+        "operationId": "webhooks-test",
+        "tags": [
+          "WEBHOOKS"
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "event_type": {
+                    "type": "string",
+                    "description": "Event type to simulate",
+                    "example": "verification.bvn.completed"
+                  },
+                  "target_url": {
+                    "type": "string",
+                    "description": "Your public webhook listener URL (e.g. webhook.site or local ngrok)",
+                    "example": "https://webhook.site/demo-endpoint"
+                  }
+                },
+                "required": [
+                  "event_type",
+                  "target_url"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Test payload successfully posted to target URL",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "status": "success",
+                    "code": "WEBHOOK_DISPATCHED",
+                    "message": "Webhook payload sent to target URL with HMAC signature.",
+                    "data": {
+                      "event_id": "evt_992019482",
+                      "event_type": "verification.bvn.completed",
+                      "delivered_to": "https://webhook.site/demo-endpoint",
+                      "signature_header": "t=1725295740,v1=9f01823901bca728...",
+                      "response_code": 200,
+                      "latency_ms": 118
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    }
+  }
+}
